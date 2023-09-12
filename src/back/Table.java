@@ -12,10 +12,13 @@ import java.util.logging.Logger;
  * @author jlope
  */
 public class Table {
-    private boolean [] chopsticks;
+    public Chopstick [] chopsticks;
 
-    public Table(int numChopsticks) {
-        this.chopsticks = new boolean[numChopsticks];
+    public Table(int numPhilosophers) {
+        this.chopsticks = new Chopstick[numPhilosophers];
+        for (int i = 0; i < numPhilosophers; i++){
+            chopsticks[i] = new Chopstick(i);
+        }
     }
     
     public int rightChopstick(int id){
@@ -30,8 +33,32 @@ public class Table {
         return id;
     }
     
+    public void grabRightChopstick(int id){
+        if (id == 0){
+            chopsticks[chopsticks.length - 1].setIsAvailable(false);
+        }else{
+            chopsticks[id - 1].setIsAvailable(false);
+        }
+    }
+    
+    public void grabLeftChopstick(int id){
+        chopsticks[id].setIsAvailable(false);
+    }
+    
+    public void dropRightChopstick(int id){
+        if (id == 0){
+            chopsticks[chopsticks.length - 1].setIsAvailable(false);
+        }else{
+            chopsticks[id - 1].setIsAvailable(false);
+        }
+    }
+    
+    public void dropLeftChopstick(int id){
+        chopsticks[id].setIsAvailable(false);
+    }
+    
     public synchronized void grabChopsticks(int Philosopher){
-        while (chopsticks[leftChopstick(Philosopher)] || chopsticks[rightChopstick(Philosopher)]) {            
+        while (!chopsticks[leftChopstick(Philosopher)].isIsAvailable() || !chopsticks[rightChopstick(Philosopher)].isIsAvailable()) {            
             try {
                 wait();
             } catch (InterruptedException ex) {
@@ -39,13 +66,13 @@ public class Table {
             }
         }
         
-        chopsticks[leftChopstick(Philosopher)] = true;
-        chopsticks[rightChopstick(Philosopher)] = true;
+        chopsticks[leftChopstick(Philosopher)].setIsAvailable(false);
+        chopsticks[rightChopstick(Philosopher)].setIsAvailable(false);
     }
     
     public synchronized void dropChopsticks(int Philosopher){
-        chopsticks[leftChopstick(Philosopher)] = false;
-        chopsticks[rightChopstick(Philosopher)] = false;
+        chopsticks[leftChopstick(Philosopher)].setIsAvailable(true);
+        chopsticks[rightChopstick(Philosopher)].setIsAvailable(true);
         notifyAll();
     }
 }

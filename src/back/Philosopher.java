@@ -14,42 +14,63 @@ import java.util.logging.Logger;
 public class Philosopher extends Thread{
     private Table table;
     private int id;
-    private int state;//1: Eating, 2:Thinking, 3:Trying to eat
+    private int index;
+    private boolean isEating;//1: Eating, 2:Thinking, 3:Trying to eat(si alcanza el tiempoxd)
 
-    public Philosopher(Table table, int id) {
+    public Philosopher(Table table, int index) {
         this.table = table;
-        this.id = id;
+        this.id = index + 1;
+        this.index = index;
+        this.isEating = false;
     }
     
     public void run(){
         while(true){
             thinking();
             
-            table.grabChopsticks(id);
+            table.grabChopsticks(index);
             System.out.println(id);
             eating();
-            System.out.println("Philosopher " + (id+1) + "stopped eating. Drop chopsticks" + (table.rightChopstick(id)+1) + " and " + (table.leftChopstick(id)+1));
-            table.dropChopsticks(id);
+            System.out.println("Philosopher " + id + "stopped eating. Drop chopsticks" + (table.rightChopstick(index)+1) + " and " + (table.leftChopstick(index)+1));
+            table.dropChopsticks(index);
         }
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+    
+    public boolean isIsEating() {
+        return isEating;
+    }
+
+    public void setIsEating(boolean isEating) {
+        this.isEating = isEating;
+    }
+    
     
     public void thinking(){
-        System.out.println("Philosopher " + (id+1) + "is thinking.");
-        state = 2;
+        System.out.println("Philosopher " + id + "is thinking.");
+        //state = 2;
         try {    
-            sleep((int) (Math.random() * 5) + 2);
+            sleep(((int) (Math.random() * 5) + 2)*1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Philosopher.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void eating(){
-        System.out.println("Philosopher " + (id+1) + "is eating.");
-        state = 1;
+        System.out.println("Philosopher " + id + "is eating.");
+        setIsEating(true);
         try {    
-            sleep((int) (Math.random() * 5) + 2);
+            sleep(((int) (Math.random() * 5) + 2)*1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Philosopher.class.getName()).log(Level.SEVERE, null, ex);
         }
+        setIsEating(false); 
     }
 }

@@ -17,6 +17,5 @@ public class ConsoleTest {
             Philosopher p = new Philosopher(table, i);
             p.start();
         }
-        
     }
 }
