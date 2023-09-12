@@ -46,10 +46,10 @@ public class mainWindow extends javax.swing.JFrame {
             philosophersUI[4] = imgPhilosopher5;
         dishes = new JLabel[numPhilosophers];
             dishes[0] = imgDish1;
-            dishes[1] = imgDish1;
-            dishes[2] = imgDish1;
-            dishes[3] = imgDish1;
-            dishes[4] = imgDish1;
+            dishes[1] = imgDish2;
+            dishes[2] = imgDish3;
+            dishes[3] = imgDish4;
+            dishes[4] = imgDish5;
     }
     
     public Philosopher createPhilosopher(int index){
@@ -203,7 +203,7 @@ public class mainWindow extends javax.swing.JFrame {
             //tercero, recorro los platos
             for(int d = 0; d < numPhilosophers; d++){
                 if(philosophers[d].isIsEating()){
-                    dishes[d].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dinner.png")));
+                    dishes[d].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/giftest.gif")));
                 }
                 else{
                     dishes[d].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dish.png")));
