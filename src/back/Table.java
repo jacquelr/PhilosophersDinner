@@ -33,29 +33,29 @@ public class Table {
         return id;
     }
     
-    public void grabRightChopstick(int id){
-        if (id == 0){
-            chopsticks[chopsticks.length - 1].setIsAvailable(false);
-        }else{
-            chopsticks[id - 1].setIsAvailable(false);
-        }
-    }
-    
-    public void grabLeftChopstick(int id){
-        chopsticks[id].setIsAvailable(false);
-    }
-    
-    public void dropRightChopstick(int id){
-        if (id == 0){
-            chopsticks[chopsticks.length - 1].setIsAvailable(false);
-        }else{
-            chopsticks[id - 1].setIsAvailable(false);
-        }
-    }
-    
-    public void dropLeftChopstick(int id){
-        chopsticks[id].setIsAvailable(false);
-    }
+//    public void grabRightChopstick(int id){
+//        if (id == 0){
+//            chopsticks[chopsticks.length - 1].setIsAvailable(false);
+//        }else{
+//            chopsticks[id - 1].setIsAvailable(false);
+//        }
+//    }
+//    
+//    public void grabLeftChopstick(int id){
+//        chopsticks[id].setIsAvailable(false);
+//    }
+//    
+//    public void dropRightChopstick(int id){
+//        if (id == 0){
+//            chopsticks[chopsticks.length - 1].setIsAvailable(false);
+//        }else{
+//            chopsticks[id - 1].setIsAvailable(false);
+//        }
+//    }
+//    
+//    public void dropLeftChopstick(int id){
+//        chopsticks[id].setIsAvailable(false);
+//    }
     
     public synchronized void grabChopsticks(int Philosopher){
         while (!chopsticks[leftChopstick(Philosopher)].isIsAvailable() || !chopsticks[rightChopstick(Philosopher)].isIsAvailable()) {            

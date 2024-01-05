@@ -15,7 +15,7 @@ public class Philosopher extends Thread{
     private Table table;
     private int id;
     private int index;
-    private boolean isEating;//1: Eating, 2:Thinking, 3:Trying to eat(si alcanza el tiempoxd)
+    private boolean isEating;
 
     public Philosopher(Table table, int index) {
         this.table = table;
@@ -55,7 +55,6 @@ public class Philosopher extends Thread{
     
     public void thinking(){
         System.out.println("Philosopher " + id + "is thinking.");
-        //state = 2;
         try {    
             sleep(((int) (Math.random() * 5) + 2)*1000);
         } catch (InterruptedException ex) {

@@ -181,7 +181,7 @@ public class mainWindow extends javax.swing.JFrame {
     public void updateInterface(){
         Thread thread = new Thread (()->{
            while(true){
-               //primero recorro los tenedores
+            //update chopsticks
             for (int c = 0; c < numPhilosophers ; c++){
                 if (table.chopsticks[c].isIsAvailable()){
                     chopsticksUI[c].setVisible(true);
@@ -190,7 +190,7 @@ public class mainWindow extends javax.swing.JFrame {
                 }
             }
             
-            //segundo, recorro los filosofos
+            //update philosophers
             for(int p = 0; p < numPhilosophers; p++){
                 if(philosophers[p].isIsEating()){
                     philosophersUI[p].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eating2.gif")));
@@ -200,7 +200,7 @@ public class mainWindow extends javax.swing.JFrame {
                 }
             }
             
-            //tercero, recorro los platos
+            //update dishes
             for(int d = 0; d < numPhilosophers; d++){
                 if(philosophers[d].isIsEating()){
                     dishes[d].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/giftest.gif")));
